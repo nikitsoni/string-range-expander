@@ -14,3 +14,11 @@ def test_stage_2():
     assert expand_string(" , 1-3 , ,5 ") == [1, 2, 3, 5]
     assert expand_string("  10 - 12  ,  ") == [10, 11, 12]
     assert expand_string("1-1,, ,2") == [1, 2]
+
+def test_stage_3():
+    
+    # Stage 3: Custom Range Delimiters
+    assert expand_string("1..3") == [1, 2, 3]
+    assert expand_string("4~6") == [4, 5, 6]
+    assert expand_string("10 to 12") == [10, 11, 12]
+    assert expand_string("1..2, 5~6, 8 to 9") == [1, 2, 5, 6, 8, 9]
