@@ -31,7 +31,7 @@ def test_stage_3():
 def test_stage_4():
 
     # Stage 4: Handle Reversed or Invalid Ranges Gracefully
-    assert expand_string("5-3") == [5, 4, 3]
+    assert expand_string("5-3") == [3, 4, 5]
     assert expand_string("3-3") == [3]
     with pytest.raises(ValueError):
         expand_string("3-a")
@@ -42,7 +42,14 @@ def test_stage_5():
     
     # Stage 5: Support Step Values
     assert expand_string("1-10:2") == [1, 3, 5, 7, 9]
-    assert expand_string("10-1:3") == [10, 7, 4, 1]
+    assert expand_string("10-1:3") == [1, 4, 7, 10]
     assert expand_string("3-3:1") == [3]
     with pytest.raises(ValueError):
         expand_string("1-5:x")
+
+def test_stage_6():
+    
+    # Stage 6: Duplicate and Overlapping Range Handling
+    assert expand_string("1-3,2-5,") == [1, 2, 3, 4, 5]
+    assert expand_string("3,3,3") == [3]
+    assert expand_string("1-2,2-3") == [1, 2, 3]

@@ -48,5 +48,6 @@ def expand_string(input_str: str) -> list[int]:
             if not is_valid_number(token):
                 raise ValueError(f"Non-numeric value found: '{token}'")
             expanded.append(int(token))
-
+    
+    expanded = sorted(set(expanded))
     return expanded
