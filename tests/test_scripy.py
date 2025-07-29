@@ -53,3 +53,12 @@ def test_stage_6():
     assert expand_string("1-3,2-5,") == [1, 2, 3, 4, 5]
     assert expand_string("3,3,3") == [3]
     assert expand_string("1-2,2-3") == [1, 2, 3]
+
+def test_stage_7():
+    
+    # Stage 7: Output Format Control
+    assert expand_string("1-3", output_format="list") == [1, 2, 3]
+    assert expand_string("1-3", output_format="csv") == "1,2,3"
+    assert expand_string("1-3", output_format="set") == {1, 2, 3}
+    with pytest.raises(ValueError):
+        expand_string("1-3", output_format="xml")

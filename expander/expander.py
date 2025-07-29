@@ -3,7 +3,7 @@ from expander.validator import is_valid_number
 from expander.config import STEP_DELIMITER
 
 
-def expand_string(input_str: str) -> list[int]:
+def expand_string(input_str: str, output_format: str = "list") -> list[int]:
 
     tokens = parse_input(input_str)
     expanded = []
@@ -50,4 +50,12 @@ def expand_string(input_str: str) -> list[int]:
             expanded.append(int(token))
     
     expanded = sorted(set(expanded))
-    return expanded
+    
+    if output_format == "list":
+        return expanded
+    elif output_format == "csv":
+        return ",".join(str(n) for n in expanded)
+    elif output_format == "set":
+        return set(expanded)
+    else:
+        raise ValueError(f"Unsupported output format: '{output_format}'")
