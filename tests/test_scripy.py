@@ -37,3 +37,12 @@ def test_stage_4():
         expand_string("3-a")
     with pytest.raises(ValueError):
         expand_string("a")
+
+def test_stage_5():
+    
+    # Stage 5: Support Step Values
+    assert expand_string("1-10:2") == [1, 3, 5, 7, 9]
+    assert expand_string("10-1:3") == [10, 7, 4, 1]
+    assert expand_string("3-3:1") == [3]
+    with pytest.raises(ValueError):
+        expand_string("1-5:x")
